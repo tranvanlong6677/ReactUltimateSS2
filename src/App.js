@@ -27,15 +27,9 @@ import React from "react";
 // };
 
 class App extends React.Component {
-  state = {
-    name: "Long",
-    address: "Hanoi",
-    age: 21,
-  };
   render() {
     return (
       <div>
-        Hello world
         <MyComponent />
       </div>
     );
