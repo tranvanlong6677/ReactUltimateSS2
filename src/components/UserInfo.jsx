@@ -46,9 +46,7 @@ class UserInfo extends React.Component {
             onChange={(event) => this.handleOnChangeAge(event)}
           />
           <br />
-          <div>
-            My name is {this.state.name} and my age is {this.state.age}
-          </div>
+
           <button>Submit</button>
         </form>
       </div>
