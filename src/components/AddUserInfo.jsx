@@ -1,20 +1,20 @@
 import React from "react";
 
-class UserInfo extends React.Component {
+class AddUserInfo extends React.Component {
   state = {
-    name: "Long",
+    name: "",
     address: "Hanoi",
-    age: 21,
+    age: "",
   };
-  handleClickBtn = (event) => {
-    // let newAge = Math.floor(Math.random() * 100) + 1;
-    this.setState({
-      name: "Long Tran",
-      age: Math.floor(Math.random() * 100) + 1,
-    });
-    console.log(this.state.name);
-    console.log(this.state.age);
-  };
+  // handleClickBtn = (event) => {
+  //   // let newAge = Math.floor(Math.random() * 100) + 1;
+  //   this.setState({
+  //     name: "Long Tran",
+  //     age: Math.floor(Math.random() * 100) + 1,
+  //   });
+  //   console.log(this.state.name);
+  //   console.log(this.state.age);
+  // };
 
   handleOnChangeInput = (event) => {
     this.setState({ name: event.target.value });
@@ -26,7 +26,12 @@ class UserInfo extends React.Component {
 
   handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+    // this.props.listUsers.push(this.state);
+    console.log("check:", this.state);
+    this.props.handleAddNewUser({
+      ...this.state,
+      id: Math.floor(Math.random() * 100 + 1 + "random"),
+    });
   };
   render() {
     return (
@@ -54,4 +59,4 @@ class UserInfo extends React.Component {
   }
 }
 
-export default UserInfo;
+export default AddUserInfo;
