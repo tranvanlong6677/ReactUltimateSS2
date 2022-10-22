@@ -1,19 +1,36 @@
 import React from "react";
 class DisplayInfo extends React.Component {
+  state = {
+    show: true,
+  };
+  handleShowHide = () => {
+    this.setState({
+      show: !this.state.show,
+    });
+    // alert("me");
+  };
   render() {
     const { listUsers } = this.props;
+    console.log(listUsers);
     return (
       <div>
-        {listUsers.map((item) => {
-          return (
-            <div key={item.id}>
-              <div>
-                My name is {item.name} and my age is {item.age}
-              </div>
-              <hr />
-            </div>
-          );
-        })}
+        <button onClick={() => this.handleShowHide()}>
+          {this.state.show ? "Hide" : "Show"}
+        </button>
+        {this.state.show && (
+          <div>
+            {listUsers.map((item) => {
+              return (
+                <div key={item.id}>
+                  <div className={item.age > 26 ? "green" : "red"}>
+                    My name is {item.name} and my age is {item.age}
+                  </div>
+                  <hr />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
   }
