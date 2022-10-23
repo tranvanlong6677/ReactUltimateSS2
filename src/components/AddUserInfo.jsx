@@ -30,8 +30,9 @@ class AddUserInfo extends React.Component {
     console.log("check:", this.state);
     this.props.handleAddNewUser({
       ...this.state,
-      id: Math.floor(Math.random() * 100 + 1 + "random"),
+      id: Math.floor(Math.random() * 100 + 1) + "random",
     });
+    // console.log(Math.floor(Math.random() * 100 + 1));
   };
   render() {
     return (

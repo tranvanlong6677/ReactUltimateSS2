@@ -11,6 +11,7 @@ class DisplayInfo extends React.Component {
     });
     // alert("me");
   };
+
   render() {
     const { listUsers } = this.props;
     console.log(listUsers);
@@ -30,6 +31,9 @@ class DisplayInfo extends React.Component {
                   <div className={item.age > 26 ? "green" : "red"}>
                     My name is {item.name} and my age is {item.age}
                   </div>
+                  <button onClick={() => this.props.handleDeleteUser(item.id)}>
+                    Delete
+                  </button>
                   <hr />
                 </div>
               );
