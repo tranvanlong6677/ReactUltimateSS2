@@ -15,14 +15,14 @@ class MyComponent extends React.Component {
   };
   render() {
     return (
-      <div>
+      <>
         <AddUserInfo
           handleAddNewUser={this.handleAddNewUser}
           listUsers={this.state.listUsers}
         />
         <br />
         <DisplayInfo listUsers={this.state.listUsers} />
-      </div>
+      </>
     );
   }
 }

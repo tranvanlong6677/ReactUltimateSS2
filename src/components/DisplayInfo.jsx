@@ -16,10 +16,12 @@ class DisplayInfo extends React.Component {
     console.log(listUsers);
     return (
       <div className="display-info-container">
-        <img src={logo} alt="" />
-        <button onClick={() => this.handleShowHide()}>
-          {this.state.show ? "Hide" : "Show"}
-        </button>
+        <>
+          <img src={logo} alt="" />
+          <button onClick={() => this.handleShowHide()}>
+            {this.state.show ? "Hide" : "Show"}
+          </button>
+        </>
         {this.state.show && (
           <div>
             {listUsers.map((item) => {
