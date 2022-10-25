@@ -1,6 +1,7 @@
 import React from "react";
 import "./DisplayInfo.scss";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const DisplayInfo = (props) => {
   const { listUsers } = props;
@@ -11,6 +12,13 @@ const DisplayInfo = (props) => {
   // {
   //   console.log(props);
   // }
+  console.log("render");
+  useEffect(() => {
+    setTimeout(() => {
+      document.title = "Long2k1";
+    }, 3000);
+    console.log("useEffect");
+  }, [listUsers]);
   return (
     <div className="display-info-container">
       <div>
