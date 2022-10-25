@@ -8,6 +8,9 @@ const DisplayInfo = (props) => {
   const handleShowHideListUser = () => {
     setIsShowHideListUser(!isShowHideListUser);
   };
+  // {
+  //   console.log(props);
+  // }
   return (
     <div className="display-info-container">
       <div>
