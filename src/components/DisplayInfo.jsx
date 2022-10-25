@@ -2,19 +2,34 @@ import React from "react";
 import "./DisplayInfo.scss";
 import logo from "../logo.svg";
 class DisplayInfo extends React.Component {
-  state = {
-    show: true,
-  };
+  constructor(props) {
+    console.log("constructor");
+    super(props);
+    this.state = {
+      show: true,
+    };
+  }
+
   handleShowHide = () => {
     this.setState({
       show: !this.state.show,
     });
     // alert("me");
   };
+  componentDidMount() {
+    console.log("Component did mount");
+    setTimeout(() => {
+      document.title = "LongTran";
+    }, 3000);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("did update", this.props, prevProps);
+  }
 
   render() {
     const { listUsers } = this.props;
-    console.log(listUsers);
+    console.log("render");
     return (
       <div className="display-info-container">
         <>
