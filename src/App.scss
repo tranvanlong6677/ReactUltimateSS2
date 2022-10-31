@@ -10,11 +10,42 @@ body {
 
 .app-container {
   .header-container {
-    .navbar-nav {
+    .navbar {
+      padding-top: 20px;
       z-index: 10;
+      background-color: rgba(0, 0, 0, 0) !important;
       .nav-link {
         &.active {
           // color: red;
+        }
+      }
+    }
+  }
+  .homepage-container {
+    .homepage-content {
+      padding: 100px;
+      width: 50%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      justify-content: center;
+      gap: 30px;
+      .title-1 {
+        font-size: 45px;
+        font-weight: 600;
+      }
+      .title-2 {
+        font-size: 25px;
+      }
+      .title-3 {
+        button {
+          border-radius: 5px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -o-border-radius: 5px;
+          height: 40px;
         }
       }
     }
