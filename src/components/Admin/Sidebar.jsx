@@ -16,7 +16,9 @@ import {
   FaGithub,
   FaRegLaughWink,
   FaHeart,
+  FaReact,
 } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 import sidebarBg from "../../assets/bg2.jpg";
 const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   return (
@@ -42,29 +44,21 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
               whiteSpace: "nowrap",
             }}
           >
-            Tran Long
+            <FaReact size={"3em"} color={"00bfff"} />
+            <span>Tran Long</span>
           </div>
         </SidebarHeader>
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem
-              icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
-            >
-              dashboard
-            </MenuItem>
-            <MenuItem icon={<FaGem />}> components</MenuItem>
-          </Menu>
-          <Menu iconShape="circle">
-            <SubMenu
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
-            >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+            <SubMenu icon={<MdDashboard />} title="Dashboard"></SubMenu>
+            <SubMenu icon={<FaGem />} title="Features">
+              <MenuItem>Quản lý Users</MenuItem>
+              <MenuItem>Quản lý Bài Quiz</MenuItem>
+              <MenuItem>Quản lý Câu hỏi</MenuItem>
             </SubMenu>
+
+            {/* <MenuItem icon={<FaGem />}> components</MenuItem> */}
           </Menu>
         </SidebarContent>
 
@@ -78,10 +72,9 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             <a
               href="https://github.com/azouaoui-med/react-pro-sidebar"
               target="_blank"
-              className="sidebar-btn"
+              className="sidebar-btn btn btn-light"
               rel="noopener noreferrer"
             >
-              <FaGithub />
               <span
                 style={{
                   whiteSpace: "nowrap",
@@ -89,7 +82,7 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                   overflow: "hidden",
                 }}
               >
-                viewSource
+                Trần Long
               </span>
             </a>
           </div>
