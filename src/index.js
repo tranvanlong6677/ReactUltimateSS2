@@ -9,7 +9,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import User from "./components/User/User.jsx";
 import Admin from "./components/Admin/Admin.jsx";
 import HomePage from "./components/Home/HomePage.jsx";
-import { ProSidebarProvider } from "react-pro-sidebar";
+import Dashboard from "./components/Admin/Content/Dashboard.jsx";
+import ManageUser from "./components/Admin/Content/ManageUser.jsx";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
@@ -21,7 +23,10 @@ root.render(
           <Route index element={<HomePage />} />
           <Route path="users" element={<User />} />
         </Route>
-        <Route path="admins" element={<Admin />} />
+        <Route path="/admins" element={<Admin />}>
+          <Route index element={<Dashboard />} />
+          <Route path="manage-users" element={<ManageUser />} />
+        </Route>
       </Routes>
     </BrowserRouter>
     {/* </ProSidebarProvider> */}

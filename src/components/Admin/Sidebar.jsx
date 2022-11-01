@@ -18,6 +18,7 @@ import {
   FaHeart,
   FaReact,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import sidebarBg from "../../assets/bg2.jpg";
 const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
@@ -51,9 +52,14 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <SubMenu icon={<MdDashboard />} title="Dashboard"></SubMenu>
+            <SubMenu icon={<MdDashboard />} title="Dashboard">
+              <Link to="/admins" />
+            </SubMenu>
             <SubMenu icon={<FaGem />} title="Features">
-              <MenuItem>Quản lý Users</MenuItem>
+              <MenuItem>
+                Quản lý Users
+                <Link to="/admins/manage-users" />
+              </MenuItem>
               <MenuItem>Quản lý Bài Quiz</MenuItem>
               <MenuItem>Quản lý Câu hỏi</MenuItem>
             </SubMenu>
