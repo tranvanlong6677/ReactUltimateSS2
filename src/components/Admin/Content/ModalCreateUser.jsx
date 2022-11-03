@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BsPlusSquareDotted } from "react-icons/bs";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const ModalCreateUser = (props) => {
@@ -31,14 +32,20 @@ const ModalCreateUser = (props) => {
   };
 
   const handleSubmitCreateUser = async () => {
-    // let data = {
-    //   email: email,
-    //   password: password,
-    //   username: username,
-    //   role: role,
-    //   userImage: image,
-    // };
-    // console.log(data);
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("invalid email");
+      return;
+    }
+    if (!password) {
+      toast.error("invalid password");
+      return;
+    }
+    if (!username) {
+      toast.error("invalid username");
+      return;
+    }
+
     const data = new FormData();
     data.append("email", email);
     data.append("password", password);
@@ -49,7 +56,18 @@ const ModalCreateUser = (props) => {
       "http://localhost:8081/api/v1/participant",
       data
     );
-    console.log(res);
+    if (res.data && res.data.EC === 0) {
+      toast.success(res.data.EM);
+      handleClose();
+    }
+    if (res.data && res.data.EC !== 0) {
+      toast.error(res.data.EM);
+    }
+  };
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
   };
   return (
     <>
