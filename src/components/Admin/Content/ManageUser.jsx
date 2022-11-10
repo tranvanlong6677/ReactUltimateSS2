@@ -3,8 +3,23 @@ import "./ManageUser.scss";
 import ModalCreateUser from "./ModalCreateUser";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import TableUsers from "./TableUsers";
+import { useEffect } from "react";
+import { getAllUsers } from "../../../services/apiServices";
 const ManageUser = () => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  const [listUsers, setListUsers] = useState([]);
+  useEffect(() => {
+    fetchListUsers();
+  }, []); //useEffect chạy sau khi hàm render chạy
+
+  useEffect(() => {}, [listUsers]);
+  const fetchListUsers = async () => {
+    let res = await getAllUsers();
+    if (res.EC === 0) {
+      setListUsers(res.DT);
+    }
+    return res.DT;
+  };
   return (
     <div className="manage-user-container">
       <div className="title">Manage user</div>
@@ -19,11 +34,12 @@ const ManageUser = () => {
           </button>
         </div>
         <div className="table-users-container">
-          <TableUsers />
+          <TableUsers listUsers={listUsers} />
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
+          fetchListUsers={fetchListUsers}
         />
       </div>
     </div>
