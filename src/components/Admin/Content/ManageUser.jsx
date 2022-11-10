@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ManageUser.scss";
 import ModalCreateUser from "./ModalCreateUser";
 import { BsPlusSquareDotted } from "react-icons/bs";
-
+import TableUsers from "./TableUsers";
 const ManageUser = () => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   return (
@@ -18,7 +18,9 @@ const ManageUser = () => {
             Add new user
           </button>
         </div>
-        <div className="table-users-container">Table user</div>
+        <div className="table-users-container">
+          <TableUsers />
+        </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
