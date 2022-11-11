@@ -16,8 +16,7 @@ const TableUsers = (props) => {
           </tr>
         </thead>
         <tbody>
-          {listUsers &&
-            listUsers.length &&
+          {listUsers && listUsers.length ? (
             listUsers.map((item, index) => {
               return (
                 <tr key={`user${item.id}`}>
@@ -27,13 +26,18 @@ const TableUsers = (props) => {
                   <td>{item.role}</td>
                   <td>
                     <button className="btn btn-primary">View</button>
-                    <button className="btn btn-warning mx-3">Update</button>
+                    <button
+                      className="btn btn-warning mx-3"
+                      onClick={() => props.handleClickBtnUpdate(item)}
+                    >
+                      Update
+                    </button>
                     <button className="btn btn-danger">Delete</button>
                   </td>
                 </tr>
               );
-            })}
-          {listUsers && listUsers.length === 0 && (
+            })
+          ) : (
             <tr>
               <td colSpan="4">Not found user</td>
             </tr>

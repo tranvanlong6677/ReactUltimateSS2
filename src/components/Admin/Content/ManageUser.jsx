@@ -5,8 +5,11 @@ import { BsPlusSquareDotted } from "react-icons/bs";
 import TableUsers from "./TableUsers";
 import { useEffect } from "react";
 import { getAllUsers } from "../../../services/apiServices";
+import ModalUpdateUser from "./ModalUpdateUser";
 const ManageUser = () => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({});
   const [listUsers, setListUsers] = useState([]);
   useEffect(() => {
     fetchListUsers();
@@ -19,6 +22,11 @@ const ManageUser = () => {
       setListUsers(res.DT);
     }
     return res.DT;
+  };
+
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    setDataUpdate(user);
   };
   return (
     <div className="manage-user-container">
@@ -34,12 +42,20 @@ const ManageUser = () => {
           </button>
         </div>
         <div className="table-users-container">
-          <TableUsers listUsers={listUsers} />
+          <TableUsers
+            listUsers={listUsers}
+            handleClickBtnUpdate={handleClickBtnUpdate}
+          />
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           fetchListUsers={fetchListUsers}
+        />
+        <ModalUpdateUser
+          show={showModalUpdateUser}
+          setShow={setShowModalUpdateUser}
+          dataUpdate={dataUpdate}
         />
       </div>
     </div>
