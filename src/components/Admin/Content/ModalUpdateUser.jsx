@@ -3,18 +3,19 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import { toast } from "react-toastify";
-import { postCreateNewUser } from "../../../services/apiServices";
+import { putUpdateUser } from "../../../services/apiServices";
 import _ from "lodash";
 const ModalUpdateUser = (props) => {
-  const { show, setShow, dataUpdate } = props;
+  const { show, setShow, dataUpdate, resetDataUpdate } = props;
   const handleClose = () => {
     setShow(false);
-    setEmail();
-    setPassword();
-    setUsername();
-    setImage();
-    setRole();
-    setPreviewImg();
+    // setEmail(dataUpdate.email);
+    // setPassword(dataUpdate.password);
+    // setUsername(dataUpdate.username);
+    // setImage(dataUpdate.image);
+    // setRole("USER");
+    // setPreviewImg();
+    resetDataUpdate();
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +43,7 @@ const ModalUpdateUser = (props) => {
     }
   };
 
-  const handleSubmitCreateUser = async () => {
+  const handleSubmitUpdateUser = async () => {
     // const isValidEmail = validateEmail(email);
     // if (!isValidEmail) {
     //   toast.error("invalid email");
@@ -57,7 +58,7 @@ const ModalUpdateUser = (props) => {
     //   return;
     // }
 
-    let data = await postCreateNewUser(email, password, username, role, image);
+    let data = await putUpdateUser(dataUpdate.id, username, role, image);
     console.log("component data: ", data);
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -68,11 +69,11 @@ const ModalUpdateUser = (props) => {
       toast.error(data.EM);
     }
   };
-  const validateEmail = (email) => {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
+  //   const validateEmail = (email) => {
+  //     return email.match(
+  //       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //     );
+  //   };
   console.log(">>> check dataupdate", props.dataUpdate);
   return (
     <>
@@ -159,7 +160,7 @@ const ModalUpdateUser = (props) => {
           <Button variant="secondary" onClick={() => handleClose()}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
+          <Button variant="primary" onClick={() => handleSubmitUpdateUser()}>
             Save
           </Button>
         </Modal.Footer>
