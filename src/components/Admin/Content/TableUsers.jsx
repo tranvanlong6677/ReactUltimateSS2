@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { getAllUsers } from "../../../services/apiServices";
+// import React, { useState } from "react";
+// import { useEffect } from "react";
+// import { getAllUsers } from "../../../services/apiServices";
 const TableUsers = (props) => {
   const { listUsers } = props;
   return (
@@ -25,7 +25,12 @@ const TableUsers = (props) => {
                   <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td>
-                    <button className="btn btn-primary">View</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => props.handleClickViewBtn(item)}
+                    >
+                      View
+                    </button>
                     <button
                       className="btn btn-warning mx-3"
                       onClick={() => props.handleClickBtnUpdate(item)}

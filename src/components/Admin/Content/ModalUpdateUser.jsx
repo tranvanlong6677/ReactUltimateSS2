@@ -59,7 +59,6 @@ const ModalUpdateUser = (props) => {
     // }
 
     let data = await putUpdateUser(dataUpdate.id, username, role, image);
-    console.log("component data: ", data);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
@@ -74,7 +73,6 @@ const ModalUpdateUser = (props) => {
   //       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   //     );
   //   };
-  console.log(">>> check dataupdate", props.dataUpdate);
   return (
     <>
       {/* <Button variant="primary" onClick={handleShow}>
