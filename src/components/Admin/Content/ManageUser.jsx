@@ -53,6 +53,7 @@ const ManageUser = () => {
     setShowModalDeleteUser(true);
     setDataDeleteUser(user);
   };
+
   return (
     <div className="manage-user-container">
       <div className="title">Manage user</div>
@@ -98,6 +99,7 @@ const ManageUser = () => {
           show={showModalDeleteUser}
           setShow={setShowModalDeleteUser}
           dataDeleteUser={dataDeleteUser}
+          fetchListUsers={fetchListUsers}
         />
       </div>
     </div>
