@@ -13,10 +13,11 @@ import ViewUser from "./ViewUser";
 import ModalDeleteUser from "./ModalDeleteUser";
 import TableUsersPaginate from "./TableUserPaginate";
 const ManageUser = () => {
-  const LIMIT_USER = 6;
+  const LIMIT_USER = 4;
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [showViewUser, setShowViewUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
   const [dataViewUser, setDataViewUser] = useState({});
@@ -97,12 +98,17 @@ const ManageUser = () => {
             handleClickDeleteBtn={handleClickDeleteBtn}
             fetchListUsersWithPaginate={fetchListUsersWithPaginate}
             pageCount={pageCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           fetchListUsers={fetchListUsers}
+          fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
         <ModalUpdateUser
           show={showModalUpdateUser}
@@ -110,6 +116,9 @@ const ManageUser = () => {
           dataUpdate={dataUpdate}
           fetchListUsers={fetchListUsers}
           resetDataUpdate={resetDataUpdate}
+          fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
 
         <ViewUser
@@ -124,6 +133,9 @@ const ManageUser = () => {
           setShow={setShowModalDeleteUser}
           dataDeleteUser={dataDeleteUser}
           fetchListUsers={fetchListUsers}
+          fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       </div>
     </div>

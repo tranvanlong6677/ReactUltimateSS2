@@ -8,6 +8,7 @@ const TableUsersPaginate = (props) => {
 
   const handlePageClick = (event) => {
     props.fetchListUsersWithPaginate(+event.selected + 1);
+    props.setCurrentPage(+event.selected + 1);
   };
   return (
     <>
@@ -80,6 +81,7 @@ const TableUsersPaginate = (props) => {
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
+          forcePage={props.currentPage - 1} // đk để khi click số trong dãy số phân trang thì dãy số đó sẽ phụ thộc vào currentPage
         />
       </div>
     </>
