@@ -47,11 +47,12 @@ const ModalCreateUser = (props) => {
     }
 
     let data = await postCreateNewUser(email, password, username, role, image);
-    console.log("component data: ", data);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
       // await props.fetchListUsers();
+      // props.setCurrentPage(1);// set biến currentPage về 1 để về trang 1
+      await props.fetchListUsersWithPaginate(1); // fetch list users ở trang 1
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);

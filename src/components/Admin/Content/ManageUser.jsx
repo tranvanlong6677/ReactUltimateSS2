@@ -42,7 +42,6 @@ const ManageUser = () => {
     if (res.EC === 0) {
       setListUsers(res.DT.users);
       setPageCount(res.DT.totalPages);
-      console.log("Res.data: ", res.DT);
     }
     return res.DT;
   };
@@ -66,7 +65,6 @@ const ManageUser = () => {
   };
 
   const handleClickDeleteBtn = (user) => {
-    console.log(">>> check data user delete:  ", user);
     setShowModalDeleteUser(true);
     setDataDeleteUser(user);
   };

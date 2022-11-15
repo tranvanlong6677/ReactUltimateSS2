@@ -2,7 +2,15 @@
   .header {
     height: 45px;
     text-align: right;
-    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      border: 1px solid #3578e5;
+      padding: 3px 15px;
+      border-radius: 5px;
+      background-color: #fff;
+    }
   }
   .title {
     font-size: 25px;
@@ -15,7 +23,8 @@
     text-align: center;
   }
   .content-form {
-    border: 1px solid green;
+    padding: 10px;
+    border: 1px solid #d3d3d3;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -31,6 +40,13 @@
       border-radius: 5px;
       color: white;
       background: black;
+    }
+    .back {
+      cursor: pointer;
+      padding: 3px 10px;
+      &:hover {
+        background: #d3d3d3;
+      }
     }
   }
 }
