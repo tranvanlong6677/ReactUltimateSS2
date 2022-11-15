@@ -11,8 +11,22 @@ const Login = () => {
   const handleBack = () => {
     navigate("/");
   };
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
   const handleLogin = async () => {
     //Validate data
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("invalid email");
+      return;
+    }
+    if (!password) {
+      toast.error("invalid password");
+      return;
+    }
 
     //submit api
 

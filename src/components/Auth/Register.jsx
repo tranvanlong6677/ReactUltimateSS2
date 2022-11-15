@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { postRegister } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import "./Register.scss";
+// AiFillEyeInvisible AiFillEye
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 const Register = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const handleBack = () => {
     navigate("/");
   };
@@ -46,14 +49,22 @@ const Register = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group form-group-password">
           <label htmlFor="">Password</label>
           <input
-            type={"password"}
+            type={isShowPassword ? "text" : "password"}
             className="form-control"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
+          <span
+            className="show-password"
+            onClick={() => {
+              setIsShowPassword(!isShowPassword);
+            }}
+          >
+            {isShowPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+          </span>
         </div>
 
         <div className="form-group">

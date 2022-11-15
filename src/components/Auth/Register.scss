@@ -44,5 +44,14 @@
         background: #d3d3d3;
       }
     }
+    .form-group-password {
+      position: relative;
+      .show-password {
+        position: absolute;
+        right: 20px;
+        top: 35%;
+        font-size: 20px;
+      }
+    }
   }
 }
