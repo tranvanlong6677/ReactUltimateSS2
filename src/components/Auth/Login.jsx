@@ -8,14 +8,17 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const handleBack = () => {
+    navigate("/");
+  };
   const handleLogin = async () => {
     //Validate data
 
     //submit api
 
     let data = await postLogin(email, password);
-    console.log("check res:", data);
     if (data && +data.EC === 0) {
+      console.log(data);
       toast.success(data.EM);
       navigate("/");
     }
@@ -28,10 +31,11 @@ const Login = () => {
     <div className="login-container">
       <div className="header">
         <span className="mx-3">Don't have an account yet?</span>
-        <button>Sign up</button>
+        <button onClick={() => navigate("/register")}>Sign up</button>
       </div>
-      <div className="title col-4 mx-auto">Long Tran</div>
-      <div className="welcome col-4 mx-auto">Hello ,who's this?</div>
+      <div className="title">
+        <span>Login</span>
+      </div>
       <div className="content-form col-4 mx-auto">
         <div className="form-group">
           <label htmlFor="Email">Email</label>
@@ -56,14 +60,12 @@ const Login = () => {
         <span className="text-center">Forgot password ?</span>
         <div></div>
         <button className="btn-submit" onClick={() => handleLogin()}>
-          Login to Long Tran Web
+          Login
         </button>
-        <div className="text-center">
+        <div className="text-center" onClick={() => handleBack()}>
           <span className="back"> &#60;&#60; Go to Homepage</span>
         </div>
       </div>
-      <div className="header"></div>
-      <div className="header"></div>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
 import { Link, Outlet } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   return (
@@ -21,18 +20,6 @@ const App = () => {
           */}
         </div>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 };
