@@ -3,11 +3,14 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../services/apiServices";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../redux/action/userAction";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const handleBack = () => {
     navigate("/");
   };
@@ -32,7 +35,7 @@ const Login = () => {
 
     let data = await postLogin(email, password);
     if (data && +data.EC === 0) {
-      console.log(data);
+      dispatch(doLogin(data));
       toast.success(data.EM);
       navigate("/");
     }
