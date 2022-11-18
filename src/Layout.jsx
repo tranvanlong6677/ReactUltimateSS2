@@ -8,6 +8,7 @@ import Login from "./components/Auth/Login.jsx";
 import Register from "./components/Auth/Register";
 import App from "./App";
 import { ToastContainer, toast } from "react-toastify";
+import ListQuiz from "./components/User/ListQuiz.jsx";
 
 const Layout = (props) => {
   return (
@@ -15,7 +16,7 @@ const Layout = (props) => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="users" element={<User />} />
+          <Route path="users" element={<ListQuiz />} />
         </Route>
         <Route path="/admins" element={<Admin />}>
           <Route index element={<Dashboard />} />
