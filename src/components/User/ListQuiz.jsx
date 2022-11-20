@@ -38,7 +38,11 @@ const ListQuiz = () => {
                   <button
                     href="#"
                     className="btn btn-primary"
-                    onClick={() => navigate(`/quiz/${item.id}`)}
+                    onClick={() =>
+                      navigate(`/quiz/${item.id}`, {
+                        state: { quizTitle: `${item.description}` },
+                      })
+                    }
                   >
                     Start Now
                   </button>

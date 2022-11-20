@@ -1,0 +1,27 @@
+.detail-quiz-container {
+  display: flex;
+  gap: 20px;
+  padding-top: 50px;
+  .left-content {
+    border: 1px solid red;
+    width: 70%;
+    .title {
+      font-size: 30px;
+      font-weight: 600;
+    }
+    .q-content {
+      .question {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .answer {
+      }
+    }
+    .footer {
+    }
+  }
+  .right-content {
+    border: 1px solid green;
+    width: 30%;
+  }
+}
