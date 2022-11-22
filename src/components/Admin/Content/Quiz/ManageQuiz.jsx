@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./ManageQuiz.scss";
 import Select from "react-select";
+import { postNewQuiz } from "../../../../services/apiServices";
+import { toast } from "react-toastify";
 
 const ManageQuiz = (props) => {
   const options = [
@@ -10,9 +12,31 @@ const ManageQuiz = (props) => {
   ];
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("EASY");
+  const [type, setType] = useState("");
   const [image, setImage] = useState(null);
-  const handleChangeFile = (event) => {};
+  const handleSubmitQuiz = async () => {
+    if (!name || !description) {
+      toast.error("Name and description is required");
+      return;
+    }
+    let res = await postNewQuiz(description, name, type?.value, image);
+    console.log("check res", res);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      setName("");
+      setType("");
+      setDescription("");
+      setImage(null);
+    } else {
+      toast.error(res.EM);
+    }
+  };
+  const handleChangeFile = (event) => {
+    if (event.target && event.target.files && event.target.files[0]) {
+      //   setPreviewImg(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
+    }
+  };
   return (
     <div className="manage-quiz-container container">
       <div className="title text-center">Manage Quiz</div>
@@ -41,10 +65,15 @@ const ManageQuiz = (props) => {
             <label>Description</label>
           </div>
           <div className="quiz-type my-4">
-            <Select options={options} placeholder={"Quiz type"} value={type} />
+            <Select
+              options={options}
+              placeholder={"Quiz type"}
+              defaultValue={type}
+              onChange={setType}
+            />
           </div>
           <div className="more-actions">
-            <label
+            {/* <label
               htmlFor="upload"
               style={{
                 fontSize: "20px",
@@ -63,9 +92,34 @@ const ManageQuiz = (props) => {
               id="upload"
               className="form-control"
               onChange={(e) => handleChangeFile(e)}
-              value={image}
-            />
+
+              //   value={image}
+            /> */}
+            <div class="mb-3">
+              <label htmlFor="upload" class="form-label">
+                Upload image for your quiz
+              </label>
+              <input
+                type="file"
+                id="upload"
+                className="form-control"
+                onChange={(e) => handleChangeFile(e)}
+              />
+            </div>
           </div>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button
+            style={{
+              borderRadius: "5px",
+              width: "200px",
+              height: "40px",
+            }}
+            className="btn btn-dark"
+            onClick={() => handleSubmitQuiz()}
+          >
+            Save
+          </button>
         </div>
       </div>
       <div className="list-detail">table</div>
