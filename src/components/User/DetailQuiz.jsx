@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { getDataQuiz } from "../../services/apiServices";
+import { getDataQuiz, postSubmitQuiz } from "../../services/apiServices";
 import "./DetailQuiz.scss";
 import Question from "./Question";
+import ModalResult from "./ModalResult";
 
 import _ from "lodash";
-import { set } from "nprogress";
 
 const DetailQuiz = () => {
   const params = useParams();
@@ -13,6 +13,8 @@ const DetailQuiz = () => {
   const location = useLocation();
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
+  const [isShowModalResult, setIsShowModalResult] = useState(false);
+  const [dataModalResult, setDataModalResult] = useState({});
   useEffect(() => {
     fetchQuestions();
   }, [quizId]);
@@ -50,7 +52,7 @@ const DetailQuiz = () => {
       setDataQuiz(dataQuizClone);
     }
   };
-  const handleFinishClick = () => {
+  const handleFinishClick = async () => {
     let payload = { quizId: +quizId, answers: [] };
     let answers = [];
     console.log("check data before submit", dataQuiz);
@@ -71,6 +73,19 @@ const DetailQuiz = () => {
     }
     payload.answers = answers;
     console.log("final payload:", payload);
+    //submit api
+    let res = await postSubmitQuiz(payload);
+    console.log("check res:", res);
+    if (res && res.EC === 0) {
+      setDataModalResult({
+        countCorrect: res.DT.countCorrect,
+        countTotal: res.DT.countTotal,
+        quizData: res.DT.quizData,
+      });
+      setIsShowModalResult(true);
+    } else {
+      alert("something wrongs");
+    }
   };
   const fetchQuestions = async () => {
     let res = await getDataQuiz(quizId);
@@ -143,6 +158,12 @@ const DetailQuiz = () => {
         </div>
       </div>
       <div className="right-content">count down</div>
+      <ModalResult
+        show={isShowModalResult}
+        setShow={setIsShowModalResult}
+        dataModalResult={dataModalResult}
+        setDataModalResult={setDataModalResult}
+      />
     </div>
   );
   // :
