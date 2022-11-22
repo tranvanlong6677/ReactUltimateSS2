@@ -32,7 +32,6 @@ const DetailQuiz = () => {
     let question = dataQuizClone.find(
       (item) => +item.questionId === +questionId
     );
-    console.log("check question", question);
     if (question && question.answers) {
       let b = question.answers.map((item) => {
         if (+item.id === +answerId) {
@@ -51,7 +50,28 @@ const DetailQuiz = () => {
       setDataQuiz(dataQuizClone);
     }
   };
-  const handleFinishClick = () => {};
+  const handleFinishClick = () => {
+    let payload = { quizId: +quizId, answers: [] };
+    let answers = [];
+    console.log("check data before submit", dataQuiz);
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((item) => {
+        let questionId = item.questionId;
+        let userAnswerId = [];
+        item.answers.forEach((itemArrAnswers) => {
+          if (itemArrAnswers.isSelected) {
+            userAnswerId.push(itemArrAnswers.id);
+          }
+        });
+        answers.push({
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
+        });
+      });
+    }
+    payload.answers = answers;
+    console.log("final payload:", payload);
+  };
   const fetchQuestions = async () => {
     let res = await getDataQuiz(quizId);
     if (res && res.EC === 0) {
@@ -84,7 +104,7 @@ const DetailQuiz = () => {
       setDataQuiz(data);
     }
   };
-  console.log("check dataQuiz", dataQuiz);
+
   return (
     <div className="detail-quiz-container container">
       <div className="left-content">

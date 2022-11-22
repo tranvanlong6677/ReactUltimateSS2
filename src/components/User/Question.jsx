@@ -3,8 +3,6 @@ import _ from "lodash";
 const Question = (props) => {
   const { data, index } = props;
   const handleCheckbox = (event, qId, aId) => {
-    console.log("check data:", data);
-    console.log("check id:", qId, aId);
     props.handleCheckBox(qId, aId);
   };
   if (_.isEmpty(data)) {
@@ -24,23 +22,18 @@ const Question = (props) => {
           data.answers.length > 0 &&
           data.answers.map((a, index) => {
             return (
-              <div>
-                <div className="a-child" key={`answer-${index}`}>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                      checked={a.isSelected}
-                      onClick={(event) =>
-                        handleCheckbox(event, data.questionId, a.id)
-                      }
-                    />
-                    <label className="form-check-label" for="flexCheckDefault">
-                      {a.description}
-                    </label>
-                  </div>
+              <div className="a-child" key={`answer-${index}`}>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    checked={a.isSelected}
+                    onChange={(event) =>
+                      handleCheckbox(event, data.questionId, a.id)
+                    }
+                  />
+                  <label className="form-check-label">{a.description}</label>
                 </div>
               </div>
             );

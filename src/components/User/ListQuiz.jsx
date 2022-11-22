@@ -21,34 +21,32 @@ const ListQuiz = () => {
         arrayQuiz.length > 0 &&
         arrayQuiz.map((item, index) => {
           return (
-            <>
-              <div
-                key={`${index} quiz`}
-                className="card"
-                style={{ width: "18rem" }}
-              >
-                <img
-                  className="card-img-top"
-                  src={`data:image/png;base64,${item.image}`}
-                  alt="Card image cap"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Quiz {index + 1} </h5>
-                  <p className="card-text">{item.description}</p>
-                  <button
-                    href="#"
-                    className="btn btn-primary"
-                    onClick={() =>
-                      navigate(`/quiz/${item.id}`, {
-                        state: { quizTitle: `${item.description}` },
-                      })
-                    }
-                  >
-                    Start Now
-                  </button>
-                </div>
+            <div
+              key={`${index}-quiz`}
+              className="card"
+              style={{ width: "18rem" }}
+            >
+              <img
+                className="card-img-top"
+                src={`data:image/png;base64,${item.image}`}
+                alt="Card image cap"
+              />
+              <div className="card-body">
+                <h5 className="card-title">Quiz {index + 1} </h5>
+                <p className="card-text">{item.description}</p>
+                <button
+                  href="#"
+                  className="btn btn-primary"
+                  onClick={() =>
+                    navigate(`/quiz/${item.id}`, {
+                      state: { quizTitle: `${item.description}` },
+                    })
+                  }
+                >
+                  Start Now
+                </button>
               </div>
-            </>
+            </div>
           );
         })}
 
