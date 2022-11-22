@@ -9,15 +9,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaList,
-  FaGithub,
-  FaRegLaughWink,
-  FaHeart,
-  FaReact,
-} from "react-icons/fa";
+import { FaGem, FaReact } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import sidebarBg from "../../assets/bg2.jpg";
