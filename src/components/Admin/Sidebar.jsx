@@ -18,10 +18,11 @@ import {
   FaHeart,
   FaReact,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import sidebarBg from "../../assets/bg2.jpg";
 const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
+  const navigate = useNavigate();
   return (
     <>
       <ProSidebar
@@ -46,7 +47,9 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             }}
           >
             <FaReact size={"3em"} color={"00bfff"} />
-            <span>Tran Long</span>
+            <span onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+              Home
+            </span>
           </div>
         </SidebarHeader>
 
@@ -60,7 +63,10 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                 Quản lý Users
                 <Link to="/admins/manage-users" />
               </MenuItem>
-              <MenuItem>Quản lý Bài Quiz</MenuItem>
+              <MenuItem>
+                Quản lý Bài Quiz
+                <Link to="/admins/manage-quizzes" />
+              </MenuItem>
               <MenuItem>Quản lý Câu hỏi</MenuItem>
             </SubMenu>
 
