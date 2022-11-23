@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { getAllQuizForAdmin } from "../../../../services/apiServices";
-import Accordion from "react-bootstrap/Accordion";
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
 const TableQuiz = (props) => {
   const [listQuiz, setListQuiz] = useState([]);
+  const [isShowModalUpdateQuiz, setIsShowModalUpdateQuiz] = useState(false);
+  const [isShowModalDeleteQuiz, setIsShowModalDeleteQuiz] = useState(false);
+  const [quizCurrentUpdate, setQuizCurrentUpdate] = useState({});
+  const [quizCurrentDelete, setQuizCurrentDelete] = useState({});
+
   useEffect(() => {
     fetchQuiz();
   }, []);
@@ -13,6 +19,14 @@ const TableQuiz = (props) => {
       setListQuiz(res.DT);
     }
     // setListQuiz(res.DT);
+  };
+  const handleClickUpdateQuiz = (data) => {
+    setIsShowModalUpdateQuiz(true);
+    setQuizCurrentUpdate(data);
+  };
+  const handleClickDeleteQuiz = (data) => {
+    setIsShowModalDeleteQuiz(true);
+    setQuizCurrentDelete(data);
   };
   return (
     <div>
@@ -29,23 +43,49 @@ const TableQuiz = (props) => {
         </thead>
         <tbody>
           {listQuiz &&
-            listQuiz.map((item) => {
+            listQuiz.map((item, index) => {
               return (
-                <tr>
+                <tr key={`quiz${index}`}>
                   <th scope="row">{item.id}</th>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>{item.type}</td>
                   <td>{item.difficulty}</td>
                   <td>
-                    <button className="btn btn-primary mx-3">Update</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-primary mx-3"
+                      onClick={() => handleClickUpdateQuiz(item)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleClickDeleteQuiz(item)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </table>
+      <ModalUpdateQuiz
+        show={isShowModalUpdateQuiz}
+        setShow={setIsShowModalUpdateQuiz}
+        quizCurrentUpdate={quizCurrentUpdate}
+        setQuizCurrentUpdate={setQuizCurrentUpdate}
+        listQuiz={listQuiz}
+        setListQuiz={setListQuiz}
+        fetchQuiz={fetchQuiz}
+      />
+      <ModalDeleteQuiz
+        show={isShowModalDeleteQuiz}
+        setShow={setIsShowModalDeleteQuiz}
+        quizCurrentDelete={quizCurrentDelete}
+        setQuizCurrentDelete={setQuizCurrentDelete}
+        fetchQuiz={fetchQuiz}
+      />
     </div>
   );
 };

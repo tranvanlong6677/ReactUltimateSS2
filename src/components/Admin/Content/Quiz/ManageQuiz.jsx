@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./ManageQuiz.scss";
 import Select from "react-select";
-import { postNewQuiz } from "../../../../services/apiServices";
+import {
+  postNewQuiz,
+  getAllQuizForAdmin,
+} from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
 import Accordion from "react-bootstrap/Accordion";
@@ -16,6 +19,7 @@ const ManageQuiz = (props) => {
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [image, setImage] = useState(null);
+
   const handleSubmitQuiz = async () => {
     if (!name || !description) {
       toast.error("Name and description is required");
@@ -39,6 +43,7 @@ const ManageQuiz = (props) => {
       setImage(event.target.files[0]);
     }
   };
+
   return (
     <div className="manage-quiz-container container">
       <Accordion defaultActiveKey="0">
