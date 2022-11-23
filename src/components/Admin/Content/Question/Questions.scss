@@ -12,6 +12,9 @@
     .group-upload {
       display: flex;
       align-items: center;
+      span {
+        font-size: 20px;
+      }
       .label-upload {
         height: 30px;
         border: 1px solid #ccc;
@@ -49,8 +52,10 @@
       .btn-action {
         display: flex;
         gap: 5px;
+        align-items: center;
         button {
-          padding: 5px 30px;
+          height: 30px;
+          padding: 0px 15px;
         }
       }
     }
