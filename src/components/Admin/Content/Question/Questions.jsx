@@ -4,6 +4,8 @@ import "./Questions.scss";
 import { BiImageAdd } from "react-icons/bi";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
+import Lightbox from "react-awesome-lightbox";
+
 const Questions = () => {
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [questions, setQuestions] = useState([
@@ -26,6 +28,12 @@ const Questions = () => {
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ];
+
+  const [isPreviewImage, setIsPreviewImage] = useState(false);
+  const [dataImgPreview, setDataImgPreview] = useState({
+    title: "",
+    url: "",
+  });
 
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
@@ -124,6 +132,18 @@ const Questions = () => {
   const handleSubmitQuesitonForQuiz = () => {
     console.log("check questions:", questions);
   };
+
+  const handlePreviewImage = (questionId) => {
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
+    if (index > -1) {
+      setDataImgPreview({
+        url: URL.createObjectURL(questionsClone[index].imageFile),
+        title: questionsClone[index].imageName,
+      });
+      setIsPreviewImage(true);
+    }
+  };
   return (
     <div className="questions-container container">
       <div className="title">Manage Questions</div>
@@ -171,9 +191,18 @@ const Questions = () => {
 
                     <span>
                       <BiImageAdd />
-                      {item && item.imageName
-                        ? item.imageName
-                        : "0 file is uploaded"}
+                      <span>
+                        {item && item.imageName ? (
+                          <span
+                            onClick={() => handlePreviewImage(item.id)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            {item.imageName}
+                          </span>
+                        ) : (
+                          "0 file is uploaded"
+                        )}
+                      </span>
                     </span>
                   </div>
                   <div className="btn-add">
@@ -181,7 +210,7 @@ const Questions = () => {
                       className="btn btn-primary"
                       onClick={() => handleAddRemoveQuestion("ADD", "")}
                     >
-                      Add new{" "}
+                      Add new
                     </button>
                   </div>
 
@@ -272,6 +301,13 @@ const Questions = () => {
               Save questions
             </button>
           </div>
+        )}
+        {isPreviewImage && (
+          <Lightbox
+            image={dataImgPreview.url}
+            title={dataImgPreview.title}
+            onClose={() => setIsPreviewImage(false)}
+          ></Lightbox>
         )}
       </div>
     </div>
