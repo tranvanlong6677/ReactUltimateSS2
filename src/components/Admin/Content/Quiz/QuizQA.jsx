@@ -6,8 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 import { useEffect } from "react";
-import { getAllQuizForAdmin } from "../../../../services/apiServices";
+
 import {
+  getAllQuizForAdmin,
+  getQuizWithQA,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuiz,
 } from "../../../../services/apiServices";
@@ -38,6 +40,39 @@ const QuizQA = () => {
     fetchQuiz();
   }, []);
 
+  useEffect(() => {
+    if (selectedQuiz && selectedQuiz.value) {
+      fetchQuizWithQA();
+    }
+  }, [selectedQuiz]);
+
+  const urltoFile = (url, filename, mimeType) => {
+    return fetch(url)
+      .then((res) => res.arrayBuffer())
+      .then((buf) => {
+        return new File([buf], filename, { type: mimeType });
+      });
+  };
+
+  const fetchQuizWithQA = async () => {
+    let res = await getQuizWithQA(selectedQuiz.value);
+    if (res.EC === 0 && res) {
+      let newQA = [];
+      for (let i = 0; i < res.DT.qa.length; i++) {
+        let q = res.DT.qa[i];
+        if (q.imageFile) {
+          q.imageName = `Question-${q.id}.png`;
+          q.imageFile = await urltoFile(
+            `data:image/png;base64,${q.imageFile}`,
+            `Question-${q.id}`,
+            `image/png`
+          );
+        }
+        newQA.push(q);
+      }
+      setQuestions(newQA);
+    }
+  };
   const fetchQuiz = async () => {
     let res = await getAllQuizForAdmin();
     if (res && res.EC === 0) {
